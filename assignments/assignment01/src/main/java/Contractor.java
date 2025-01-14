@@ -5,6 +5,12 @@ public class Contractor extends Employee {
   // construtor declaration
   public Contractor(String payPosition, String name, String title, int SSN, int requiredHours) {
     super(payPosition, name, title, SSN);
+    this.requiredHours = requiredHours;
+  }
+
+  public Contractor(String payPosition, String name, String title, int SSN) {
+    super(payPosition, name, title, SSN);
+    this.requiredHours = 45;
   }
 
   // getter

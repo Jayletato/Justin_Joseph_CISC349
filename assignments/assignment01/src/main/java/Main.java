@@ -82,7 +82,7 @@ public class Main {
       System.out.println("Integer parameter needed, try again");
       return;
     }
-    
+
     // returns the details of the employee at the index specified
     int inputInteger = 0;
     // HERE OFFICER HERE
@@ -128,7 +128,7 @@ public class Main {
     if (inputArray.length > 6) {
       System.out.println("Too many arguments. Please try again.");
       return;}
-    
+
     // Sets the name
     name = inputArray[2];
 
@@ -202,13 +202,13 @@ public class Main {
     if (parameterToChange.equals("name")) {
       staff.get(employeeIndex).setName(newParameter);
     }
-  
+
     // Changing an employee's pay position will create  an altered duplicate instance of them and delete the original
     else if (parameterToChange.equals("position")) {
       if (newParameter.equals("fulltime") || newParameter.equals("fulltimer")) {
         staff.add(new FullTimer("FullTimer", staff.get(employeeIndex).getName(), staff.get(employeeIndex).getTitle(), staff.get(employeeIndex).getSSN(), staff.get(employeeIndex).getRequiredHours()));
       }
-    
+
       if (newParameter.equals("parttime") || newParameter.equals("fulltimer")) {
         staff.add(new PartTimer("PartTimer", staff.get(employeeIndex).getName(), staff.get(employeeIndex).getTitle(), staff.get(employeeIndex).getSSN(), staff.get(employeeIndex).getRequiredHours()) );
       }
@@ -244,10 +244,10 @@ public class Main {
     }
 
   return;
-    
-    
+
+
   }
-  
+
   public static void removeEmployee(String[] inputArray){
     //deletes an employee from the system by index
     int inputInteger;
@@ -257,7 +257,7 @@ public class Main {
       System.out.println("Integer parameter needed, try again");
       return;
     }
-    
+
     try {
       inputInteger = Integer.parseInt(inputArray[1]);
     } catch (NumberFormatException nfe) {

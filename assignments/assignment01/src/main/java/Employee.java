@@ -5,7 +5,8 @@ public class Employee {
 
   // instance variables
   String payPosition; // This is mostly redundant but I do not want to rewrite everything;
-  String name; // This would probably have been better implemented as a separate First Name and Last Name;
+  String name; // This would probably have been better implemented as a separate First Name and
+               // Last Name;
   String title;
   int SSN;
   int requiredHours;
@@ -49,11 +50,11 @@ public class Employee {
     this.name = name;
   }
 
-  public void getTitle(String title) {
+  public void setTitle(String title) {
     this.title = title;
   }
 
-  public void getSSN(int SSN) {
+  public void setSSN(int SSN) {
     this.SSN = SSN;
   }
 
