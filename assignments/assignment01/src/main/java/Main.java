@@ -14,9 +14,9 @@ public class Main {
 
   public static void main(String[] args) {
     // Test staff
-    staff.add(new FullTimer("Fulltimer", "Bob Ross", "Professor", 123456789, 78));
-    staff.add(new PartTimer("PartTimer", "Pete Zahut", "Tutor", 123456789, 49));
-    staff.add(new PartTimer("PartTimer", "Leon S. Kennedy", "Rookie", 123456789, 69));
+    staff.add(new FullTimer("Fulltimer", "Bob_Ross", "Professor", 123456789, 78));
+    staff.add(new PartTimer("PartTimer", "Pete_Zahut", "Tutor", 123456789, 49));
+    staff.add(new PartTimer("PartTimer", "Leon_S._Kennedy", "Rookie", 123456789, 69));
     // add PartTime Jill SuccessCoordinator 123984567 20
 
 
