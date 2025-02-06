@@ -20,14 +20,23 @@ def query_example():
               <h1>The framework value is: {}</h1>
               <h1>The website value is: {}'''.format(language, framework, website)
 
-@app.route('/form-example')
+@app.route('/form-example', methods=['GET','POST'])
 def form_example():
-    return 'Form Data Example'
+    if request.method == 'POST':
+        language = request.form.get('language')
+        framework = request.form.get('framework')
+        return 'POST'
+    return 'GET'
 
-@app.route('/json-example')
+@app.route('/json-example', methods=['POST'])
 def json_example():
-    return 'JSON Object Example'
+    request_data = request.get_json()
+    username = request_data['username']
+    password = request_data['password']
+
+    # Do something to validate user and password
+    return '{"authorized" : true}'
 
 if __name__ == '__main__':
     # run app in debug mode on port 5000
-    app.run(debug=True, port=5000)
+    app.run(host='0.0.0.0', debug=True, port=5000)
