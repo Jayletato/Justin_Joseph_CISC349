@@ -14,4 +14,8 @@
         <item>.Net</item>
         <item>Perl</item>
     </string-array>
+    <string name="username_field">Username</string>
+    <string name="pnumber_field">Phone Number</string>
+    <string name="description_field">Description</string>
+
 </resources>

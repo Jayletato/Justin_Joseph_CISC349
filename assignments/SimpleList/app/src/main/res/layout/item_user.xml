@@ -1,20 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/linear_layout_00"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <TextView
-        android:id="@+id/name"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:paddingVertical="10dp">
+    <ImageView
+        android:id="@+id/bingus_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:textSize="16sp">
-    </TextView>
-    <TextView
-        android:id="@+id/phone"
-        android:layout_width="wrap_content"
+        android:textAlignment="viewStart"
+        app:srcCompat="@mipmap/bingus_round"
+        android:padding="10dp"/>
+    <LinearLayout
+        android:id="@+id/linear_layout_01"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="#000000"
-        android:textSize="16sp">
-    </TextView>
+        android:orientation="vertical" >
+        <LinearLayout
+            android:id="@+id/linear_layout_02"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="30dp">
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_gravity="top"/>
+        <TextView
+            android:id="@+id/phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textAlignment="viewEnd"
+            android:paddingHorizontal="20dp"
+            android:layout_gravity="top"/>
+        </LinearLayout>
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:layout_gravity="bottom"/>
+    </LinearLayout>
+
 
 </LinearLayout>

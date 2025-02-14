@@ -1,5 +1,6 @@
 package com.justinjoseph.simplelist;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,14 +54,15 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
 
+        //The image is currently hardcoded in the layout element so they all have the same picture
         ArrayList<User> arrayOfUsers = new ArrayList<>();
-        arrayOfUsers.add(new User("Eve", "777-777-7777"));
-        arrayOfUsers.add(new User("John", "777-777-7777"));
-        arrayOfUsers.add(new User("Mark", "777-777-7777"));
-        arrayOfUsers.add(new User("Michael", "777-777-7777"));
-        arrayOfUsers.add(new User("Adam", "777-777-7777"));
-        arrayOfUsers.add(new User("Mary", "777-777-7777"));
-        arrayOfUsers.add(new User("Olivia", "777-777-7777"));
+        arrayOfUsers.add(new User("Eve", "777-777-7777","Description"));
+        arrayOfUsers.add(new User("John", "777-717-7777","meow"));
+        arrayOfUsers.add(new User("Bingus", "127-777-7777","Currently on parole >:3"));
+        arrayOfUsers.add(new User("Michael", "777-777-7777","I am hungry for thermal paste!1!"));
+        arrayOfUsers.add(new User("Adam", "727-777-7777","Description"));
+        arrayOfUsers.add(new User("Mary", "777-777-7764","Description"));
+        arrayOfUsers.add(new User("Olivia", "777-377-7477","nyaaa :3"));
 
 
         // Create the adapter to convert the array to views
@@ -74,12 +76,22 @@ public class MainActivity extends AppCompatActivity {
         ListView listView = (ListView) findViewById(R.id.listView);
         listView.setAdapter(adapter);
 
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//        @Override
-//        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//            String value = adapter.getItem(position);
-//            Toast.makeText(getApplicationContext(), value, Toast.LENGTH_SHORT). show();
-//        }
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                 User current_user = adapter.getItem(position);
+                Toast.makeText(getApplicationContext(), current_user.getName(), Toast.LENGTH_SHORT).show();
+
+                // Start ProfileActivity
+                Intent i = new Intent(MainActivity.this, ProfileActivity.class);
+                String message = "Hello from MainActivity";
+                i.putExtra("Username", current_user.getName());
+                i.putExtra("Phone", current_user.getPhone());
+                i.putExtra("Description", current_user.getDescription());
+                startActivity(i);
+            }
+        });
 
     }
 }

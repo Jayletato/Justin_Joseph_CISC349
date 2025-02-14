@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class UserAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<User> arrayList;
-    private TextView name, phone;
+    private TextView name, phone, description;
 
     public UserAdapter(Context context, ArrayList<User> arrayList) {
         this.context = context;
@@ -25,9 +25,7 @@ public class UserAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int position) {
-        return position; //change this later, it's wrong
-    }
+    public User getItem(int position) { return arrayList.get(position);}
 
     @Override
     public long getItemId(int position) {
@@ -39,8 +37,10 @@ public class UserAdapter extends BaseAdapter {
         convertView = LayoutInflater.from(context).inflate(R.layout.item_user, parent, false );
         name = convertView.findViewById(R.id.name);
         phone = convertView.findViewById(R.id.phone);
+        description = convertView.findViewById(R.id.description);
         name.setText(arrayList.get(position).getName());
         phone.setText(arrayList.get(position).getPhone());
+        description.setText(arrayList.get(position).getDescription());
         return convertView;
     }
 }
