@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:paddingVertical="10dp">
+    <!--
+    <ImageView
+        android:id="@+id/album_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="viewStart"
+        android:padding="10dp" />
+        -->
+    <com.android.volley.toolbox.NetworkImageView
+        android:id="@+id/album_image"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:background="#000000"
+        android:scaleType="centerInside"
+        />
+    <LinearLayout
+        android:id="@+id/linear_layout_01"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+            <TextView
+                android:id="@+id/song_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_gravity="top"
+                android:paddingHorizontal="20sp" />
+            <TextView
+            android:id="@+id/album_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textAlignment="viewStart"
+            android:paddingHorizontal="20dp"
+            android:layout_gravity="top"
+            android:text="@string/album_name"/>
+            <TextView
+                android:id="@+id/artist_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textAlignment="viewStart"
+                android:paddingHorizontal="20dp"
+                android:layout_gravity="top"
+                android:text="@string/artist_name"/>
+            <TextView
+                android:id="@+id/danceability"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textAlignment="viewStart"
+                android:paddingHorizontal="20dp"
+                android:layout_gravity="top"
+                android:text="@string/danceability"/>
+        <TextView
+            android:id="@+id/duration"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:layout_gravity="end"
+            android:textAlignment="viewEnd"
+            android:text="@string/duration"/>
+    </LinearLayout>
+
+
+
+</LinearLayout>

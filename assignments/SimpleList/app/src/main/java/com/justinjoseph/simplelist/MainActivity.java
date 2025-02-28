@@ -20,9 +20,6 @@ import androidx.core.view.WindowInsetsCompat;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    ListView listView;
-    TextView textView;
-    String[] listItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
