@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">DynamicListView</string>
+    <string name="album_name">Album: </string>
+    <string name="artist_name">Artist: </string>
+    <string name="danceability">Danceability: </string>
+    <string name="duration">Duration: </string>
+</resources>
