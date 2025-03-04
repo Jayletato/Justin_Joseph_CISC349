@@ -54,6 +54,7 @@ public class HolidaySongsAdapter extends BaseAdapter {
         artist_name = convertView.findViewById(R.id.artist_name);
         danceability = convertView.findViewById(R.id.danceability);
         duration = convertView.findViewById(R.id.duration);
+//        playlist_image = convertView.findViewById(R.id.playlist_image);
 
         RequestQueue queue = Volley.newRequestQueue(context);
         ImageLoader imageLoader = new ImageLoader(queue, new ImageLoader.ImageCache() {
@@ -72,6 +73,7 @@ public class HolidaySongsAdapter extends BaseAdapter {
             }
         });
 
+        // convert the duration from ms to minutes and seconds before drawing values.
         Integer duration_minutes = 0;
         Integer duration_seconds= 0;
         try {
@@ -89,6 +91,8 @@ public class HolidaySongsAdapter extends BaseAdapter {
         artist_name.setText("Artist: " + arrayList.get(position).getArtist_name());
         danceability.setText("Danceability: " + arrayList.get(position).getDanceability());
         duration.setText(String.format("Duration: %d%s %d%s", duration_minutes, "m", duration_seconds, "s"));
+//        playlist_image.setImageUrl(arrayList.get(position).getAlbum_image_url(), imageLoader);
+
 
         return convertView;
     }
