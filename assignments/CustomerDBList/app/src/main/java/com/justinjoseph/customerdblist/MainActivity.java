@@ -1,26 +1,15 @@
 package com.justinjoseph.customerdblist;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.PixelCopy;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.PopupWindow;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -40,10 +29,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    RequestQueue queue;
     private Gson gson;
     protected ListView list;
-    protected String url;
+    protected String url = "https://127.0.0.1:5000/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,81 +44,37 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        url = getString(R.string.url_string) + "/all";
-
         GsonBuilder gsonBuilder = new GsonBuilder();
         gson = gsonBuilder.create();
 
         list = (ListView) findViewById(R.id.listView);
         List<Customer> customers = new ArrayList<>();
 
-        queue = Volley.newRequestQueue(this);
+        RequestQueue queue = Volley.newRequestQueue(this);
         queue.start();
 
-        // Iterate through the request response to get each customer
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.POST, url, null, response -> {
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
                 for (int i = 0; i < response.length(); i++) {
                     try {
-                        Log.d(".onResponse", "onResponse start");
                         Customer cus = gson.fromJson(response.getJSONObject(i).toString(), Customer.class);
                         customers.add(cus);
-                        Log.d(".onResponse", "Added customer " + cus.getName());
                     } catch (JSONException e) {
-                        Log.d(".onResponse", "JSONArray error :(");
                         e.printStackTrace();
                     }
                 }
                 CustomerAdapter adapter = new CustomerAdapter(customers, list.getContext());
                 list.setAdapter(adapter);
                 //list.setOnItemClickListener(adapter);
-        }, error -> {
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
                 Log.d("ERROR", "Error loading content.");
+            }
         });
         queue.add(jsonArrayRequest);
 
-        Button addButton = findViewById(R.id.add_button);
-        addButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, AddCustomerActivity.class);
-                startActivity(intent);
-                Log.d(".MainActivity.onClick", "started activity");
-            }
-        });
-    }
-
-    public void drawPopUpWindow(View v, LayoutInflater inflater) {
-        //Draw a pop up window
-        View popupView = inflater.inflate(R.layout.edit_customer_popup, null);
-        PopupWindow popupWindow = new PopupWindow(popupView, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, true);
-        popupWindow.showAtLocation(this.getCurrentFocus(), Gravity.CENTER,0,0);//
-
-        // Functionality for add and cancel buttons
-        ImageButton add_comment = popupView.findViewById(R.id.add_comment_button);
-        ImageButton delete_comment = popupView.findViewById(R.id.delete_comment_button);
-
-        //TODO: create a comment adapter and add it to the on click listener
-//        add_comment.setOnClickListener();
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        Log.d("MainActivity.onRestart", "onRestart called");
-        recreate();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.d("MainActivity.onStop", "onStop called");
-        queue.stop();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.d("MainActivity.onPause", "onPause called");
-        queue.stop();
     }
 }

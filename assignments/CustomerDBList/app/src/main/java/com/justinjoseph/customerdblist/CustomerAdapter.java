@@ -19,7 +19,7 @@ public class CustomerAdapter extends BaseAdapter {
     TextView name;
     TextView address;
     TextView phone;
-    TextView comment;
+//    ArrayList<String> comment;
 
     public CustomerAdapter(List<Customer> customers, Context context) {
         this.context = context;
@@ -48,12 +48,13 @@ public class CustomerAdapter extends BaseAdapter {
         name = view.findViewById(R.id.customer_name);
         phone = view.findViewById(R.id.customer_phone);
         address = view.findViewById(R.id.customer_address);
-        comment = view.findViewById(R.id.customer_comment);
+
+//        comment = view.findViewById(R.id.customer_comment);
 
         name.setText(customers.get(i).getName());
         phone.setText(customers.get(i).getPhone());
         address.setText(customers.get(i).getAddress());
-        comment.setText(customers.get(i).getComment());
+//        comment.setText(customers.get(i).getComment());
 
         return view;
     }
