@@ -49,16 +49,18 @@ public class AddCustomerActivity extends AppCompatActivity {
         EditText name = findViewById(R.id.enter_name);
         EditText address = findViewById(R.id.enter_address);
         EditText phone = findViewById(R.id.enter_phone);
+        EditText comment = findViewById(R.id.enter_comment);
 
         Button confirmButton = findViewById(R.id.confirm_button);
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 queue.start();
-                EditText[] editTexts = {name, address, phone};
+                EditText[] editTexts = {name, address, phone, comment};
                 String name_string;
                 String address_string;
                 String phone_string;
+                String comment_string;
                 // Makes sure editTexts are valid. If not, stop this onClick early and do nothing.
                 if(!isTextValid(editTexts[0], "name")) {
                     return;
@@ -69,6 +71,9 @@ public class AddCustomerActivity extends AppCompatActivity {
                 if(!isTextValid(editTexts[2], "phone")){
                     return;
                 }
+                // Make comment string unless it is invalid, then make it blank
+                try {comment_string = comment.getText().toString();}
+                catch (Exception e) {comment_string = "";}
 
                 // Create JsonArray to send to server and JsonObject to insert into the Array
                 JSONArray dataArray = new JSONArray();
@@ -78,6 +83,7 @@ public class AddCustomerActivity extends AppCompatActivity {
                 data.put("name", name.getText().toString());
                 data.put("address", address.getText().toString());
                 data.put("phone", phone.getText().toString());
+                data.put("comment", comment.getText().toString());
                 } catch (Exception e) {
                     Log.d(".AddCustomerActivity.java", "Error adding customer. Terminating request.");
                     return;

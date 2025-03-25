@@ -12,7 +12,7 @@ public class Customer {
     protected String name;
     protected String address;
     protected String phone;
-    protected ArrayList<String> comment;
+    protected String comment;
 
     public Customer(JSONObject jsonData) throws JSONException {
         if (jsonData.has("_id")) {
@@ -21,10 +21,7 @@ public class Customer {
         this.name = (jsonData.getString("name"));
         this.address = (jsonData.getString("address"));
         this.phone = (jsonData.getString("phone"));
-        for (int i = 0, ) {
-
-        }
-//            this.comment = (jsonData.getJSONArray("comments").);
+        this.comment = (jsonData.getString("comment"));
 
 //      From when comments was a list of comments
 //        if (jsonData.has("comments")) {

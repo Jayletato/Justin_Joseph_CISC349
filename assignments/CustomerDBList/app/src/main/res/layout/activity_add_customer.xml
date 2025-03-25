@@ -46,6 +46,13 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20sp"
             android:layout_marginVertical="10sp"/>
+        <EditText
+            android:id="@+id/enter_comment"
+            android:hint="@string/enter_hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20sp"
+            android:layout_marginVertical="10sp"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
