@@ -1,4 +1,4 @@
-package com.justinjoseph.customerdblist;
+package com.justinjoseph.mongodbflasklistview;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -78,13 +78,16 @@ public class MainActivity extends AppCompatActivity {
                     } catch (JSONException e) {
                         Log.d(".onResponse", "JSONArray error :(");
                         e.printStackTrace();
+                    } catch (Exception e) {
+                        Log.d("./MainActivity/jsonArrayRequest", "Some other error?");
                     }
                 }
                 CustomerAdapter adapter = new CustomerAdapter(customers, list.getContext());
                 list.setAdapter(adapter);
                 //list.setOnItemClickListener(adapter);
         }, error -> {
-                Log.d("ERROR", "Error loading content.");
+            error.printStackTrace();
+                Log.d("./MainActivity/ERROR", "Error loading content.");
         });
         queue.add(jsonArrayRequest);
 

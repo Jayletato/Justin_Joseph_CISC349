@@ -1,4 +1,4 @@
-package com.justinjoseph.customerdblist;
+package com.justinjoseph.mongodbflasklistview;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,9 +7,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerAdapter extends BaseAdapter {
@@ -55,6 +52,12 @@ public class CustomerAdapter extends BaseAdapter {
         address.setText(customers.get(i).getAddress());
 //        comment.setText(customers.get(i).getComment());
 
+        // Add onClick listener on the view to show the comments
+//        view.setOnClickListener(v -> {
+//            View commentView = LayoutInflater.from(context).inflate(R.layout.);
+//        });
+
         return view;
     }
 }
+

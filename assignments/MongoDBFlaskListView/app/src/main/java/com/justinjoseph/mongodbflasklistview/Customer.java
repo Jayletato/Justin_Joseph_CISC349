@@ -1,11 +1,12 @@
-package com.justinjoseph.customerdblist;
+package com.justinjoseph.mongodbflasklistview;
+
+import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Customer {
     protected String _id;
@@ -21,25 +22,26 @@ public class Customer {
         this.name = (jsonData.getString("name"));
         this.address = (jsonData.getString("address"));
         this.phone = (jsonData.getString("phone"));
-        JSONArray comment_array = jsonData.getJSONArray("comments");
-        for (int i = 0; i < comment_array.length(); i++) {
-            comments.add(comment_array.getString(i));
-        }
+//        JSONArray comment_array = jsonData.getJSONArray("comments");
+//        for (int i = 0; i < comment_array.length(); i++) {
+//            comments.add(comment_array.getString(i));
+//            Log.d("./Customer", "Added Customer!");
+//        }
 //            this.comment = (jsonData.getJSONArray("comments").);
 
 //      From when comments was a list of comments
-//        if (jsonData.has("comments")) {
-//            JSONArray cmts = jsonData.getJSONArray("comments");
-//            if (null != cmts) {
-//                comments = new ArrayList<String>();
-//                for (int i=0 ; i < cmts.length(); i++) {
-//                    comments.add(cmts.get(i).toString());
-//                }
-//            }
-//        }
-//        else {
-//            comments = new ArrayList<String>();
-//        }
+        if (jsonData.has("comments")) {
+            JSONArray cmts = jsonData.getJSONArray("comments");
+            if (null != cmts) {
+                comments = new ArrayList<String>();
+                for (int i=0 ; i < cmts.length(); i++) {
+                    comments.add(cmts.get(i).toString());
+                }
+            }
+        }
+        else {
+            comments = new ArrayList<String>();
+        }
     }
 
     public String getId() {
