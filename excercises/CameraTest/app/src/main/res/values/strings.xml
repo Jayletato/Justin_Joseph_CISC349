@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">CameraTest</string>
+    <string name="url_string">http://10.2.106.99:5000</string>
+</resources>
