@@ -15,7 +15,7 @@ import java.util.List;
 
 public class PictureListAdapter extends BaseAdapter {
     List<Bitmap> pictures;
-    private Context context;
+    private final Context context;
 
     public PictureListAdapter(Context context, ArrayList<Bitmap> pictures) {
         this.context = context;

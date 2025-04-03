@@ -70,16 +70,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button list = findViewById(R.id.list_button);
-        list.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Log.d("CameraTest","in list Click");
-                Intent i = new Intent(MainActivity.this, ViewActivity.class);
-                startActivity(i);
-            }
-        });
 
     }
 
@@ -120,20 +110,21 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-//        String url = "http://192.168.0.29:5000/image";
+        String url = "http://10.2.106.99:5000/image";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, json,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.d("Hello", "Response: " + response.toString());
+                        Log.d("JsonObject Request Success", "Response: " + response.toString());
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("Hello", error.getMessage());
+                Log.d("JsonObjectRequest Erorr", Log.getStackTraceString(error));
             }
         });
 
         queue.add(jsonObjectRequest);
     }
+
 }
