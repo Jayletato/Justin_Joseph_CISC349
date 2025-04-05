@@ -23,14 +23,19 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Dictionary;
 
 public class MainActivity extends AppCompatActivity {
     static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -38,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     BitmapDrawable drawable;
     RequestQueue queue;
     String url;
-    ArrayList<String> pictures;
+//    ArrayList<JSONObject> pictures;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         url = getString(R.string.url_string);
-        url = url+"/image";
+
 
         Button capture = findViewById(R.id.camera_button);
         Button pictureList = findViewById(R.id.picture_list_button);
@@ -61,7 +66,8 @@ public class MainActivity extends AppCompatActivity {
         queue = Volley.newRequestQueue(this);
         queue.start();
 
-        pictures = new ArrayList<String>();
+//        pictures = new ArrayList<JSONObject>();
+//        getPictures(pictures);
 
 
         //Image capture and send to database functionality
@@ -78,13 +84,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(cameraIntent, REQUEST_IMAGE_CAPTURE);
             }
         });
+
         pictureList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d("PicturesActivity","Sent to the pictures realm");
                 // Start activity with the list of images
                 Intent picturesIntent = new Intent(getBaseContext(), PicturesActivity.class);
-                picturesIntent.putExtra("picture list", pictures);
+//                picturesIntent.putExtra();
                 startActivity(picturesIntent);
             }
         });
@@ -105,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
                 final Bitmap bitmap = drawable.getBitmap();
 
                 String image = encodeToBase64(bitmap,Bitmap.CompressFormat.PNG,100);
-                pictures.add(image);
+//                pictures.add(image);
                 uploadToServer(image);
 
             } else if (resultCode == RESULT_CANCELED) {
@@ -126,12 +133,21 @@ public class MainActivity extends AppCompatActivity {
         JSONObject json = new JSONObject();
         try {
             json.put("image", image);
+
+            LocalDateTime myDateObj = LocalDateTime.now();
+            DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+            String formattedDate = myDateObj.format(myFormatObj);
+            json.put("datetime", formattedDate);
+
+            json.put("comment", "");
+
+            Log.d("JSONObject", json.toString());
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        String url = "http://10.2.106.99:5000/image";
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, json,
+        String image_url = url+"/image";
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, image_url, json,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
