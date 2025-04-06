@@ -20,6 +20,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".UpdateCommentActivity"
+            android:exported="false" />
+        <activity
             android:name=".PicturesActivity"
             android:exported="false" />
         <activity

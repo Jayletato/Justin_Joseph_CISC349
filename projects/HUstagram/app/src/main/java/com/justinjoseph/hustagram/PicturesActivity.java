@@ -6,11 +6,14 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +21,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -35,7 +39,7 @@ public class PicturesActivity extends AppCompatActivity {
     ArrayList<JSONObject> pictures;
     RequestQueue queue;
     String url;
-    ScrollView picturesScrollView;
+    ListView picturesScrollView;
 
 
     @Override
@@ -85,26 +89,10 @@ public class PicturesActivity extends AppCompatActivity {
 
                     Log.d("array", pictures.toString());
                     //TODO: Create views for all images in the arraylist
-                    for (int i = 0; i < pictures.toArray().length; i++){
-                        Log.d("pictures", pictures.get(i).toString());
-                        String image = pictures.get(i).getString("image");
-                        String datetime = pictures.get(i).getString("datetime");
-                        String comment = pictures.get(i).getString("comment");
+                    PicturesAdapter adapter = new PicturesAdapter(getBaseContext(), pictures);
 
-//                        View image_view = getLayoutInflater().inflate(R.layout.item_image, picturesScrollView);
-                        View image_view = LinearLayout.inflate(getBaseContext(), R.layout.item_image, picturesScrollView);
-                        ImageView imageView = image_view.findViewById(R.id.image_item_view);
-                        TextView datetimeView = image_view.findViewById(R.id.datetime);
-                        TextView commentView = image_view.findViewById(R.id.comment);
-
-                        imageView.setImageBitmap(decodeToBase64(image));
-                        datetimeView.setText("datetime: " + datetime);
-                        commentView.setText("comment: " + comment);
-
-                        picturesScrollView.addView(image_view);
-
-
-                    }
+                    ListView picturesListView = findViewById(R.id.pictures_scrollview);
+                    picturesListView.setAdapter(adapter);
                 } catch (Exception e) {
                     Log.d("JsonObject Functional Error", "Response: " + response.toString());
                 }
@@ -113,38 +101,20 @@ public class PicturesActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.d("JsonObjectRequest Error", Log.getStackTraceString(error));
+                Toast.makeText(getApplicationContext(), "Picture retrieval failed!", Toast.LENGTH_SHORT);
+                finish();
             }
         });
+        jsonArrayRequest.setRetryPolicy(new DefaultRetryPolicy(
+                10000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        ));
+
         queue.add(jsonArrayRequest);
 
 
         return true;
-
-//    // Insert the pictures from the database into the ArrayList.
-//    private void getPictures(ArrayList<String> arrayList){
-//        String get_images_url = url+"/getimages";
-//
-//        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.POST, get_images_url, null, new Response.Listener<JSONArray>() {
-//            @Override
-//            public void onResponse(JSONArray response) {
-//                try {
-//                    for (int i = 0; i < response.length(); i++) {
-//                        arrayList.add(response.get(i).toString());
-//                        Log.d("onResponse", (response.getJSONObject(i)).getString("image"));
-//                    }
-//
-//                    Log.d("JsonObject Request Success", "Response: " + response.toString());
-//                } catch (Exception e) {
-//                    Log.d("JsonObject Functional Error", "Response: " + response.toString());
-//                }
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                Log.d("JsonObjectRequest Error", Log.getStackTraceString(error));
-//            }
-//        });
-//
     }
 
     public static Bitmap decodeToBase64(String image) {
@@ -157,4 +127,29 @@ public class PicturesActivity extends AppCompatActivity {
         return bitmap_image;
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("./PicturesActivity", "onResume called");
+    }
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d("./PicturesActivity", "onRestart called");
+        recreate();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d("./PicturesActivity", "onStop called");
+        queue.stop();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d("./PicturesActivity", "onPause called");
+        queue.stop();
+    }
 }

@@ -8,6 +8,7 @@
     tools:context=".PicturesActivity">
 
     <Toolbar
+        android:id="@+id/pictures_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
@@ -18,17 +19,17 @@
         android:title="Pictures"
         />
 
-    <ScrollView
+    <ListView
         android:id="@+id/pictures_scrollview"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
 
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pictures_toolbar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         >
-        
-    </ScrollView>
+
+    </ListView>
 </androidx.constraintlayout.widget.ConstraintLayout>

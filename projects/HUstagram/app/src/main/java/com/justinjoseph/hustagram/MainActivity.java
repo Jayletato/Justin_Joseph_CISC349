@@ -151,12 +151,13 @@ public class MainActivity extends AppCompatActivity {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.d("JsonOjbect Request Success", "Response: " + response.toString());
+                        Log.d("JsonObject Request Success", "Response: " + response.toString());
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.d("JsonObjectRequest Error", Log.getStackTraceString(error));
+                Toast.makeText(getBaseContext(),"Image upload failed. Please take the image again!", Toast.LENGTH_SHORT);
             }
         });
 
