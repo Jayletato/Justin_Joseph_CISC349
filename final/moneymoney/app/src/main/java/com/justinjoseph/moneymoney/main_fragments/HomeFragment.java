@@ -1,4 +1,4 @@
-package com.justinjoseph.moneymoney.fragments;
+package com.justinjoseph.moneymoney.main_fragments;
 
 import android.os.Bundle;
 
