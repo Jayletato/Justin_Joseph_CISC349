@@ -45,7 +45,7 @@ public class TransactionFragment extends Fragment {
         amountTextView.setText(String.format("Amount: %.2f",transaction.getAmount()));
 
         TextView descriptionTextView = view.findViewById(R.id.description);
-        descriptionTextView.setText(String.format("Amount: %s",transaction.getAmount()));
+        descriptionTextView.setText(String.format("Description: %s",transaction.getDescription()));
 
         // Inflate the layout for this fragment
         return view;

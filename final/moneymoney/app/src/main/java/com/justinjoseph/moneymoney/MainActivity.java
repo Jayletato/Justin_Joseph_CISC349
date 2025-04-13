@@ -1,6 +1,8 @@
 package com.justinjoseph.moneymoney;
 
+import android.content.ClipData;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.activity.EdgeToEdge;
@@ -12,14 +14,19 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.justinjoseph.moneymoney.databinding.ActivityMainBinding;
 import com.justinjoseph.moneymoney.main_fragments.DailyFragment;
 import com.justinjoseph.moneymoney.main_fragments.HomeFragment;
+import com.justinjoseph.moneymoney.main_fragments.MonthlyFragment;
 import com.justinjoseph.moneymoney.main_fragments.WeeklyFragment;
 
 public class MainActivity extends AppCompatActivity {
+//    ItemViewModel itemViewModel;
     ActivityMainBinding binding;
+    String startDate;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +38,11 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+//        itemViewModel = new ViewModelProvider(this).get(ItemViewModel.class);
+//        itemViewModel.selectItem(new ClipData.Item(startDate));
+//        Log.d("./MainActivity", "viewmodel item: " + itemViewModel.getSelectedItem().observe(this, item -> {}).toString(););
+
+        startDate = Transaction.getTodayString();
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
@@ -54,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                 replaceFragment(new WeeklyFragment());
                 titleToolbar.setTitle("Weekly");
             } else if (item.getItemId() == R.id.monthly_tab) {
-                replaceFragment(new WeeklyFragment());
+                replaceFragment(new MonthlyFragment());
                 titleToolbar.setTitle("Monthly");
             }
 
@@ -65,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
     private void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frame_layout, fragment);
+        fragmentTransaction.replace(R.id.frame_layout, fragment, "current_fragment");
         fragmentTransaction.commit();
     }
 

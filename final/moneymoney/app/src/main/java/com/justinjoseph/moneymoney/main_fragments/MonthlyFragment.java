@@ -3,12 +3,20 @@ package com.justinjoseph.moneymoney.main_fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.justinjoseph.moneymoney.R;
+import com.justinjoseph.moneymoney.RequestHandler;
+import com.justinjoseph.moneymoney.Transaction;
+
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -61,10 +69,31 @@ public class MonthlyFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.monthly_fragment, container, false);
+        View view = inflater.inflate(R.layout.fragment_monthly, container, false);
+        FragmentManager fm = getParentFragmentManager();
+
+        TextView budgetTextView = view.findViewById(R.id.monthly_budget);
+        Double budget = 0.00;
+
+        String startDate = Transaction.getTodayString();
+        String endDate = getMonthEndString();
+        Log.d("./DailyFragment", "Today is: " + startDate);
+        Log.d("./DailyFragment", "A month from now is: " + endDate);
+        RequestHandler requestHandler = new RequestHandler(this.getContext(), view, budgetTextView,R.id.monthly_fragment_container, fm);
+        requestHandler.requestTransactions(startDate, endDate);
+
+        TextView dateRange = view.findViewById(R.id.monthly_date_range);
+        dateRange.setText(String.format("%s - %s", startDate,endDate));
+        return view;
     }
 
     public Integer getMonthlyBudget(){
         return 0;
+    }
+
+    public String getMonthEndString(){
+        LocalDate localToday = LocalDate.now();
+        LocalDate oneMonthFromNow = localToday.plus(1, ChronoUnit.MONTHS);
+        return oneMonthFromNow.toString();
     }
 }

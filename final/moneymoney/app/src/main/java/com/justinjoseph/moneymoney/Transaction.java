@@ -3,6 +3,7 @@ package com.justinjoseph.moneymoney;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Transaction {
@@ -39,5 +40,11 @@ public class Transaction {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public static String getTodayString(){
+        LocalDate localToday = LocalDate.now();
+        String today = localToday.toString();
+        return today;
     }
 }

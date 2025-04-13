@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".main_fragments.WeeklyFragment">
-
+    tools:context=".main_fragments.MonthlyFragment">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -27,7 +26,7 @@
                     android:text="@string/budget_string"
                     android:textSize="36sp"/>
                 <TextView
-                    android:id="@+id/weekly_budget"
+                    android:id="@+id/monthly_budget"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="36sp"
@@ -44,7 +43,7 @@
                     android:text="Dates: "
                     android:textSize="24sp"/>
                 <TextView
-                    android:id="@+id/weekly_date_range"
+                    android:id="@+id/monthly_date_range"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"/>
@@ -55,7 +54,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <LinearLayout
-                android:id="@+id/weekly_fragment_container"
+                android:id="@+id/monthly_fragment_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
@@ -65,5 +64,4 @@
         </ScrollView>
 
     </LinearLayout>
-
 </FrameLayout>
