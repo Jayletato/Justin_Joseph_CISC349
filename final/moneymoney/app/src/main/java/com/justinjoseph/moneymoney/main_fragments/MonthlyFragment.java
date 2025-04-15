@@ -79,8 +79,8 @@ public class MonthlyFragment extends Fragment {
         String endDate = getMonthEndString();
         Log.d("./DailyFragment", "Today is: " + startDate);
         Log.d("./DailyFragment", "A month from now is: " + endDate);
-        RequestHandler requestHandler = new RequestHandler(this.getContext(), view, budgetTextView,R.id.monthly_fragment_container, fm);
-        requestHandler.requestTransactions(startDate, endDate);
+        RequestHandler requestHandler = new RequestHandler(this.getContext(), view, fm);
+        requestHandler.requestTransactions(startDate, endDate, budgetTextView, R.id.monthly_fragment_container);
 
         TextView dateRange = view.findViewById(R.id.monthly_date_range);
         dateRange.setText(String.format("%s - %s", startDate,endDate));

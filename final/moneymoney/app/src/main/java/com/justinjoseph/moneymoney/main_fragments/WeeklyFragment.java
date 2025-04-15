@@ -80,8 +80,8 @@ public class WeeklyFragment extends Fragment {
         String endDate = getWeekEndString();
         Log.d("./DailyFragment", "Today is: " + startDate);
         Log.d("./DailyFragment", "A week from now is: " + endDate);
-        RequestHandler requestHandler = new RequestHandler(this.getContext(), view, budgetTextView,R.id.weekly_fragment_container, fm);
-        requestHandler.requestTransactions(startDate, endDate);
+        RequestHandler requestHandler = new RequestHandler(this.getContext(), view, fm);
+        requestHandler.requestTransactions(startDate, endDate, budgetTextView, R.id.weekly_fragment_container);
 
         TextView dateRange = view.findViewById(R.id.weekly_date_range);
         dateRange.setText(String.format("%s - %s", startDate,endDate));

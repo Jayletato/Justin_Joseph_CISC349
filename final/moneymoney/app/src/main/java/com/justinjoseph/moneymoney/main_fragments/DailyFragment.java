@@ -13,18 +13,7 @@ import android.widget.TextView;
 
 import com.justinjoseph.moneymoney.R;
 import com.justinjoseph.moneymoney.RequestHandler;
-import com.justinjoseph.moneymoney.RequestThread;
 import com.justinjoseph.moneymoney.Transaction;
-import com.justinjoseph.moneymoney.TransactionFragment;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.w3c.dom.Text;
-
-import java.sql.Time;
-import java.time.LocalDate;
-import java.util.Date;
 
 
 public class DailyFragment extends Fragment {
@@ -61,8 +50,8 @@ public class DailyFragment extends Fragment {
         String start_date = Transaction.getTodayString();
         String end_date = start_date;
         Log.d("./DailyFragment", "Today is: " + Transaction.getTodayString());
-        RequestHandler requestHandler = new RequestHandler(this.getContext(), view, budgetTextView,R.id.daily_fragment_container, fm);
-        requestHandler.requestTransactions(start_date, end_date);
+        RequestHandler requestHandler = new RequestHandler(this.getContext(), view, fm);
+        requestHandler.requestTransactions(start_date, end_date, budgetTextView, R.id.daily_fragment_container);
 //        try {
 //            RequestHandler requestHandler = new RequestHandler(this.getContext());
 //            JSONObject transactionsObject = requestHandler.requestTransactions("2025-04-10", "2025-04-10");
